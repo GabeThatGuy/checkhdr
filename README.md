@@ -24,6 +24,21 @@ Steps:
 That's it! You're now ready to use checkhdr anywhere on your system.
 > Note: It's possible that your shell won't recognize the executable until you quit and reopen your terminal app, so if you run the script and it says "command not found" or something like that, just quite and reopen.
 
+## Expected Output
+This script will give you three outputs (I'm working on making this more clear in future releases so for now please bare with me.
+#### Output 1: Video is HDR, and encoded in HLG or Dolby Vision
+If this is the case you will get the following output in your terminal:  
+``Target video [filename] is HDR and encoded in [HLG / Dolby Vision]``
+
+#### Output 2: Video is HDR, and encoded in PQ
+If this is the case, you will get the following output in your terminal:  
+``Target video [filename] is HDR and encoded in [PQ]``
+
+#### Output 3: Video is SDR, or invalid filename
+If this is the case, you will get the following output in your terminal:  
+``Target video [filename] is SDR or invalid file name. Ensure the filename has no spaces or backslashes.``
+> If you get Output 3, have a look at the troubleshooting section below to make sure the script got the necessary information.
+
 
 ## Troubleshooting
 Since this is by no means production ready software, it's likely you'll find a bug or two when running the script. Let's go over some things you can make sure of before reporting an issue. 
