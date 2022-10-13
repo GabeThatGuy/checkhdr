@@ -23,4 +23,14 @@ That's it! You're now ready to use checkhdr anywhere on your system.
 > Note: It's possible that your shell won't recognize the executable until you quit and reopen your terminal app, so if you run the script and it says "command not found" or something like that, just quite and reopen.
 
 
+## Troubleshooting
+Since this is by no means production ready software, it's likely you'll find a bug or two when running the script. Let's go over some things you can make sure of before reporting an issue. 
 
+### File Names
+As mentioned above, BASH really hates having spaces stored in a variable without quotes, so to make sure the script runs more reliably, rename the file in question so that there are no spaces in its name. Don't forget to include the file extension as well.
+
+### Working Directory
+It's highly recommended that you run ``pwd`` before running the script, to ensure that you're in the right directory. If you point the script at a file that doesn't exist, it will simply report an invalid file name. 
+
+### If that doesn't work...
+If you've tried and ensured that your filename and working directory are correct, and that the file name is supported by the script, have a look at the to-do section as well as the issues tab to see if the problem you're having was already reported or is being worked on. If not, go ahead and open up an issue report in the issues tab. 
