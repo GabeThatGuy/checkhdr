@@ -7,7 +7,7 @@ It is CRITICAL that your system have the ``ffmpeg`` package installed. Since thi
 ## Todo
 This repo has a todo list. Click the projects tab above (or click [here](https://github.com/users/GabeThatGuy/projects/1)) to view it.
 ## Instructions
-There are two ways to run this script. You can either run it in any folder on your disk by typing ``bash /path/to/checkhdr /path/to/filename.***`` or by adding the executable to your PATH. 
+There are two ways to run this script. You can either run it in any folder on your disk by typing ``bash /path/to/checkhdr /path/to/filename.***`` or by adding the executable to your PATH. If the executable is in your path, you can run the script anywhere by typing ``checkhdr filename.***``
 
 > Note: Bash scripts are very temperamental when it comes to storing paths in variables, so it's recommended you add the script to your PATH and navigate to the directory containing the file in question before running the script to avoid entering any paths into the command. 
 
