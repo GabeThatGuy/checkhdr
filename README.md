@@ -21,7 +21,6 @@ Steps:
 3. Type ``mkdir Scripts`` - This will make a folder in your home folder called Scripts. This is where we will put the checkhdr executable.
 4. Leave the terminal window open. Open your file explorer and navigate to ~/Scripts.
 5. Copy the checkhdr executable from your downloads folder into the Scripts folder.
-6. Switch back to the terminal window and type ``sudo chmod 755 checkhdr``. This will give your user permissions to run the executable, if they were not already granted.
 
 That's it! You're now ready to use checkhdr anywhere on your system.
 > Note: It's possible that your shell won't recognize the executable until you quit and reopen your terminal app, so if you run the script and it says "command not found" or something like that, just quite and reopen.
@@ -44,7 +43,9 @@ If this is the case, you will get the following output in your terminal:
 If this is the case, you will get the following output in your terminal and the script will exit prematurely:  
 ``[CRITICAL] Could not find file name.ext in /path/to/currentDirectory``
 
-
+#### Output 5: Permission Denied
+If this is the case, you will get a message in your terminal stating that permission was denied. You can fix this by giving yourself permission to run the script. Do the following:  
+Open a terminal window and type ``sudo chmod 755 checkhdr``
 
 ## Troubleshooting
 ### Recommended Toubleshooting Steps
