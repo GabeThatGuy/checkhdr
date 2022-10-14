@@ -7,7 +7,7 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 # Intialization
-echo "${bold}Gabe's HDR Checker${normal} v1.01r18"
+echo "${bold}Gabe's HDR Checker${normal} v1.02"
 
 # Handle Debug Mode Flag
 if [[ $2 == "-debug" || $2 == "-d" ]]
