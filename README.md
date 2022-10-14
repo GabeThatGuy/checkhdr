@@ -27,7 +27,7 @@ That's it! You're now ready to use checkhdr anywhere on your system.
 > Note: It's possible that your shell won't recognize the executable until you quit and reopen your terminal app, so if you run the script and it says "command not found" or something like that, just quite and reopen.
 
 ## Expected Output
-This script will give you three outputs (I'm working on making this more clear in future releases so for now please bare with me.
+This script will have many different outputs:
 #### Output 1: Video is HDR, and encoded in HLG or Dolby Vision
 If this is the case you will get the following output in your terminal:  
 ``Target video [filename] is HDR and encoded in [HLG / Dolby Vision]``
@@ -36,20 +36,19 @@ If this is the case you will get the following output in your terminal:
 If this is the case, you will get the following output in your terminal:  
 ``Target video [filename] is HDR and encoded in [PQ]``
 
-#### Output 3: Video is SDR, or invalid filename
+#### Output 3: Video is SDR
 If this is the case, you will get the following output in your terminal:  
-``Target video [filename] is SDR or invalid file name. Ensure the filename has no spaces or backslashes.``
-> If you get Output 3, have a look at the troubleshooting section below to make sure the script got the necessary information.
+``Target video [filename] is SDR.``
+
+#### Output 4: Couldn't fild file
+If this is the case, you will get the following output in your terminal and the script will exit prematurely:
+``[CRITICAL] Could not find file name.ext in /path/to/currentDirectory``
+
 
 
 ## Troubleshooting
-Since this is by no means production ready software, it's likely you'll find a bug or two when running the script. Let's go over some things you can make sure of before reporting an issue. 
+### Recommended Toubleshooting Steps
+1. Check that your file exists in the directory you're running the script from.
+2. Check that you included the file extension when running the script.
 
-### File Names
-As mentioned above, BASH really hates having spaces stored in a variable without quotes, so to make sure the script runs more reliably, rename the file in question so that there are no spaces in its name. Don't forget to include the file extension as well.
-
-### Working Directory
-It's highly recommended that you run ``pwd`` before running the script, to ensure that you're in the right directory. If you point the script at a file that doesn't exist, it will simply report an invalid file name. 
-
-### If that doesn't work...
-If you've tried and ensured that your filename and working directory are correct, and that the file name is supported by the script, have a look at the to-do section as well as the issues tab to see if the problem you're having was already reported or is being worked on. If not, go ahead and open up an issue report in the issues tab. 
+If you've tried and ensured that your filename and working directory are correct, have a look at the to-do section as well as the issues tab to see if the problem you're having was already reported or is being worked on. If not, go ahead and open up an issue report in the issues tab. 
