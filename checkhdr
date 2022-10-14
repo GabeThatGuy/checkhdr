@@ -1,8 +1,6 @@
 #!/bin/bash
-#Debug: echo "variable 1 is $1"
-
 # Gabe's HDR Checker Tool
-# October 12, 2022
+# Last Updated: October 14, 2022
 
 # Add Font Formatting Tags
 bold=$(tput bold)
@@ -10,25 +8,63 @@ normal=$(tput sgr0)
 
 # Intialization
 echo "${bold}Gabe's HDR Checker${normal} v1.01r18"
+
+# Handle Debug Mode Flag
+if [[ $2 == "-debug" || $2 == "-d" ]]
+then
+echo "Warning: Debug Mode Enabled!"
+debug="true"
+fi
+
 echo "-----------------------------------------------------------"
+
+# Get the current working directory
+wd=`pwd`
+
+# Check if the file specified actually exists
+file=$1
+if test -f "$file"; then
+    echo "Found $file in $wd! Continuing."
+else
+echo "[${bold}CRITICAL${normal}] Could not find file $file in $wd."
+echo "Check that the file exists in this directory, or switch to the correct directory."
+echo "Terminating Program..."
+# If the file doesn't exist, terminate the program.
+exit 1
+fi
+
+# Debug Section: Output data stored in all variables. Will be skipped if $debug is false.
+if [[ $debug == "true" ]]
+then
+echo ""
+echo "-----------------------------------------------------------"
+echo "DEBUG Information:"
+output=`ffprobe -v quiet -show_streams -select_streams v:0 "$file" | grep ^color_transfer=`
+echo "File in question: $file"
+echo "Current working directory: $wd"
+echo "FFMPEG raw output for $file: $output"
+echo "-----------------------------------------------------------"
+echo ""
+fi
+
 
 # Start Processing the requested file.
 echo "Begin video processing..."
-output=`ffprobe -v quiet -show_streams -select_streams v:0 $1 | grep ^color_transfer=`
+output=`ffprobe -v quiet -show_streams -select_streams v:0 "$file" | grep ^color_transfer=`
 
 echo "Checking video file: Analyzing Colour Profile..."
-output=`ffprobe -v quiet -show_streams -select_streams v:0 $1 | grep ^color_transfer=`
+output=`ffprobe -v quiet -show_streams -select_streams v:0 "$file" | grep ^color_transfer=`
 echo "Done!"
 
 echo "Checking video file: Analyzing Colour Primaries..."
-output=`ffprobe -v quiet -show_streams -select_streams v:0 $1 | grep ^color_transfer=`
+output=`ffprobe -v quiet -show_streams -select_streams v:0 "$file" | grep ^color_transfer=`
 echo "Done!"
 
 echo "Checking video file: Analyzing Matrix & Video Codec..."
-output=`ffprobe -v quiet -show_streams -select_streams v:0 $1 | grep ^color_transfer=`
+output=`ffprobe -v quiet -show_streams -select_streams v:0 "$file" | grep ^color_transfer=`
 echo "Done!"
 
-# Process output of command into HDR Formats
+# Process output FFPMEG raw output into HDR Formats
 if [[ $output == "color_transfer=arib-std-b67" ]]
 then
 echo "-----------------------------------------------------------"
@@ -42,7 +78,7 @@ echo "Target video $1 is ${bold}HDR${normal} and encoded in ${bold}[PQ]${normal}
 echo "-----------------------------------------------------------"
 
 else
-echo "Target video $1 is SDR or invalid file name. Ensure the filename has no spaces or backslashes."
+echo "Target video $1 is SDR."
 fi
 
 # You've reached the end of the file.
