@@ -1,4 +1,4 @@
-# checkhdr: Gabe's HDR Checking Script
+# CheckHDR: Gabe's HDR Checking Script
 A simple(ish) script to check if the video in question contains the metadata for HDR playback.
 
 ## Dependencies
