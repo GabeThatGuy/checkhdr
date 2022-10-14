@@ -41,7 +41,7 @@ If this is the case, you will get the following output in your terminal:
 ``Target video [filename] is SDR.``
 
 #### Output 4: Couldn't fild file
-If this is the case, you will get the following output in your terminal and the script will exit prematurely:
+If this is the case, you will get the following output in your terminal and the script will exit prematurely:  
 ``[CRITICAL] Could not find file name.ext in /path/to/currentDirectory``
 
 
