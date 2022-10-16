@@ -1,13 +1,23 @@
 #!/bin/bash
 # Gabe's HDR Checker Tool
-# Last Updated: October 14, 2022
+# Last Updated: October 16, 2022
 
 # Add Font Formatting Tags
 bold=$(tput bold)
 normal=$(tput sgr0)
 
 # Intialization
-echo "${bold}Gabe's HDR Checker${normal} v1.02"
+echo "${bold}Gabe's HDR Checker${normal} v1.03"
+
+# Handle if no filename is provided
+if [[ $1 == "" || $1 == "-help" || $2 == "-help" ]]
+then
+echo "Usage: "
+echo "Provide a filename as the first argument to get information about that file."
+echo "Using -d or -debug after the filename will enable debug mode."
+echo "Not providing a filename or providing the first or second argument as -help will show this page."
+exit 1
+fi
 
 # Handle Debug Mode Flag
 if [[ $2 == "-debug" || $2 == "-d" ]]
@@ -29,9 +39,43 @@ else
 echo "[${bold}CRITICAL${normal}] Could not find file $file in $wd."
 echo "Check that the file exists in this directory, or switch to the correct directory."
 echo "Terminating Program..."
+
 # If the file doesn't exist, terminate the program.
 exit 1
 fi
+
+# Read the metadata from the requested file.
+echo "Begin video processing..."
+
+# Get HDR Metadata
+outputct=`ffprobe -v quiet -show_streams -select_streams v:0 "$file" | grep ^color_transfer=`
+
+# Get Video Codec
+outputcd=`ffprobe -v quiet -show_streams -select_streams v:0 "$file" | grep ^codec_name=`
+
+# Get Video Color Space
+outputcp=`ffprobe -v quiet -show_streams -select_streams v:0 "$file" | grep ^color_primaries=`
+
+# Get Video Resolution
+outputw=`ffprobe -v quiet -show_streams -select_streams v:0 "$file" | grep ^width=`
+outputh=`ffprobe -v quiet -show_streams -select_streams v:0 "$file" | grep ^height=`
+
+# Get Video Framerate
+outputfps=`ffprobe -v quiet -show_streams -select_streams v:0 "$file" | grep ^r_frame_rate=`
+
+echo "Done!"
+
+# Define Variables to Trim output from FFProbe
+WORDTOREMOVEFPS="r_frame_rate="
+WORDTOREMOVECP="color_primaries="
+WORDTOREMOVECD="codec_name="
+
+# Process the Information about the file
+width=${outputw//[!0-9]/}
+height=${outputh//[!0-9]/}
+fps=`printf '%s\n' "${outputfps//$WORDTOREMOVEFPS/}"`
+colourspace=`printf '%s\n' "${outputcp//$WORDTOREMOVECP/}"`
+codec=`printf '%s\n' "${outputcd//$WORDTOREMOVECD/}"`
 
 # Debug Section: Output data stored in all variables. Will be skipped if $debug is false.
 if [[ $debug == "true" ]]
@@ -42,43 +86,58 @@ echo "DEBUG Information:"
 output=`ffprobe -v quiet -show_streams -select_streams v:0 "$file" | grep ^color_transfer=`
 echo "File in question: $file"
 echo "Current working directory: $wd"
-echo "FFMPEG raw output for $file: $output"
+echo "Colour Transfer: $outputct"
+echo "Colour Space: $outputcp"
+echo "Video Codec: $outputcd"
+echo "Video Resolution: $width x $height"
+echo "Video Framerate (as fraction): $fps"
 echo "-----------------------------------------------------------"
 echo ""
 fi
 
 
-# Start Processing the requested file.
-echo "Begin video processing..."
-output=`ffprobe -v quiet -show_streams -select_streams v:0 "$file" | grep ^color_transfer=`
-
-echo "Checking video file: Analyzing Colour Profile..."
-output=`ffprobe -v quiet -show_streams -select_streams v:0 "$file" | grep ^color_transfer=`
-echo "Done!"
-
-echo "Checking video file: Analyzing Colour Primaries..."
-output=`ffprobe -v quiet -show_streams -select_streams v:0 "$file" | grep ^color_transfer=`
-echo "Done!"
-
-echo "Checking video file: Analyzing Matrix & Video Codec..."
-output=`ffprobe -v quiet -show_streams -select_streams v:0 "$file" | grep ^color_transfer=`
-echo "Done!"
-
 # Process output FFPMEG raw output into HDR Formats
-if [[ $output == "color_transfer=arib-std-b67" ]]
+
+# Note: Code below this comment will not execute if Debug mode is enabled.
+
+# Handle HLG and Dolby Vision Identifiers
+if [[ $outputct == "color_transfer=arib-std-b67" && $2 != "-d" || $2 != "-debug"  ]]
 then
 echo "-----------------------------------------------------------"
 echo "Target video $1 is ${bold}HDR${normal} and encoded in ${bold}[HLG / Dolby Vision] ${normal}"
+echo
+echo "Additional Video Information: "
+echo "Video Resolution: $width x $height"
+echo "Video Framerate (as fraction): $fps"
+echo "Video Codec: ${codec}"
+echo "Video Colour Space: $colourspace"
 echo "-----------------------------------------------------------"
 
-elif [[ $output == "color_transfer=smpte2084" ]]
+# Handle PQ HDR Identifier
+elif [[ $outputct == "color_transfer=smpte2084" && $2 != "-d" || $2 != "-debug" ]]
 then
 echo "-----------------------------------------------------------"
 echo "Target video $1 is ${bold}HDR${normal} and encoded in ${bold}[PQ]${normal}"
+echo
+echo "Additional Video Information: "
+echo "Video Resolution: $width x $height"
+echo "Video Framerate (as fraction): $fps"
+echo "Video Codec: ${codec}"
+echo "Video Colour Space: $colourspace"
 echo "-----------------------------------------------------------"
 
+# Handle SDR Content
 else
+echo "-----------------------------------------------------------"
 echo "Target video $1 is SDR."
+echo
+echo "Additional Video Information: "
+echo "Video Resolution: $width x $height"
+echo "Video Framerate (as fraction): $fps"
+echo "Video Codec: ${codec}"
+echo "Video Colour Space: $colourspace"
+echo "-----------------------------------------------------------"
+
 fi
 
 # You've reached the end of the file.
