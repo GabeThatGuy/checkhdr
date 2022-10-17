@@ -25,6 +25,12 @@ Steps:
 That's it! You're now ready to use checkhdr anywhere on your system.
 > Note: It's possible that your shell won't recognize the executable until you quit and reopen your terminal app, so if you run the script and it says "command not found" or something like that, just quite and reopen.
 
+## Arguments
+> Format: ``checkhdr [arg1] [arg2]``  
+
+Argument 1: The name and extension of the file in question  
+Argument 2: Runtime flags (-debug and -help)  
+
 ## Expected Output
 This script will have many different outputs:
 #### Output 1: Video is HDR, and encoded in HLG or Dolby Vision
