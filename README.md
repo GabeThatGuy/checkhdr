@@ -5,6 +5,7 @@ A simple(ish) script to check if the video in question contains the metadata for
 It is CRITICAL that your system have the ``ffmpeg`` package installed. Since this script is designed for macOS, you can install it via homebrew by running ``brew install ffmpeg`` in your terminal app of choice. If you're running this on a linux-based system, then you can just use your favourite package manager to install ffmpeg.
 
 ### THIS SCRIPT WILL NOT WORK OR RUN ON WINDOWS SYSTEMS
+(There is an exception to this, see below)
 
 ## Todo
 This repo has a todo list. Click the projects tab above (or click [here](https://github.com/users/GabeThatGuy/projects/1)) to view it.
@@ -59,3 +60,7 @@ Open a terminal window and type ``sudo chmod 755 checkhdr``
 2. Check that you included the file extension when running the script.
 
 If you've tried and ensured that your filename and working directory are correct, have a look at the to-do section as well as the issues tab to see if the problem you're having was already reported or is being worked on. If not, go ahead and open up an issue report in the issues tab. 
+
+## Running on Windows
+If you want to run the script on Windows, you'll have to run the script from within Windows Subsystem for Linux (WSL). You can find instructions for how to set this up [here.](https://learn.microsoft.com/en-us/windows/wsl/install)  
+Once you've installed and got WSL working properly, you can run the script within WSL.
