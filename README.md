@@ -2,7 +2,7 @@
 A simple(ish) script to check if the video in question contains the metadata for HDR playback.
 
 ## Dependencies
-It is CRITICAL that your system have the ``ffmpeg`` package installed. Since this script is designed for macOS, you can install it via homebrew by running ``brew install ffmpeg`` in your terminal app of choice. If you're running this on a linux-based system, then you can just use your favourite package manager to install ffmpeg.
+It is CRITICAL that your system have the ``ffmpeg`` package installed. Since this script is designed for macOS, you can install it via homebrew by running ``brew install ffmpeg`` in your terminal app of choice. If you're running this on a linux-based system, then you can just use your favourite package manager to install ffmpeg. If your system does NOT have FFPMEG installed, the script will notify you and will terminate immediately.
 
 ### THIS SCRIPT WILL NOT WORK OR RUN ON WINDOWS SYSTEMS
 (There is an exception to this, see below)
