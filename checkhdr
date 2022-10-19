@@ -8,6 +8,10 @@ normal=$(tput sgr0)
 
 # Intialization
 echo "${bold}Gabe's HDR Checker${normal} v1.03"
+# Get the current working directory
+wd=`pwd`
+
+
 
 # Handle if no filename is provided
 if [[ $1 == "" || $1 == "-help" || $2 == "-help" ]]
@@ -28,8 +32,18 @@ fi
 
 echo "-----------------------------------------------------------"
 
-# Get the current working directory
-wd=`pwd`
+# Check that FFMPEG is installed on the system
+echo "Checking for FFPMEG Package..."
+ffprbver=`ffprobe -version | head -n 1`
+viq="ffprobe version"
+if [[ "$ffprbver" == *"$viq"* ]]
+then
+echo "FFMPEG Package is present on your system. Looking for $1."
+else
+echo "[${bold}CRITICAL${normal}] FFMPEG Package is not installed or is incorrectly installed on your system!"
+echo "Terminating Program..."
+exit 1
+fi
 
 # Check if the file specified actually exists
 file=$1
@@ -101,7 +115,7 @@ fi
 # Note: Code below this comment will not execute if Debug mode is enabled.
 
 # Handle HLG and Dolby Vision Identifiers
-if [[ $outputct == "color_transfer=arib-std-b67" && $2 != "-d" || $2 != "-debug"  ]]
+if [[ $outputct == "color_transfer=arib-std-b67" && $debug != "true" ]]
 then
 echo "-----------------------------------------------------------"
 echo "Target video $1 is ${bold}HDR${normal} and encoded in ${bold}[HLG / Dolby Vision] ${normal}"
@@ -114,7 +128,7 @@ echo "Video Colour Space: $colourspace"
 echo "-----------------------------------------------------------"
 
 # Handle PQ HDR Identifier
-elif [[ $outputct == "color_transfer=smpte2084" && $2 != "-d" || $2 != "-debug" ]]
+elif [[ $outputct == "color_transfer=smpte2084" && $debug != "true" ]]
 then
 echo "-----------------------------------------------------------"
 echo "Target video $1 is ${bold}HDR${normal} and encoded in ${bold}[PQ]${normal}"
