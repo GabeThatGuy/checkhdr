@@ -11,7 +11,6 @@ echo "${bold}Gabe's HDR Checker${normal} v1.03"
 # Get the current working directory
 wd=`pwd`
 
-# Test
 
 # Handle if no filename is provided
 if [[ $1 == "" || $1 == "-help" || $2 == "-help" ]]
