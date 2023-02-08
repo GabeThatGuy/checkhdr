@@ -15,16 +15,17 @@ There are two ways to run this script. You can either run it in any folder on yo
 > Note: Bash scripts are very temperamental when it comes to storing paths in variables, so it's recommended you add the script to your PATH and navigate to the directory containing the file in question before running the script to avoid entering any paths into the command. 
 
 ### Adding the script to your PATH.
-I'm going to assume you've never added a folder to your PATH before. If you have, just add the script executable into a folder that's already in your PATH.
+I'm going to assume you've never added a folder to your PATH before. If you have, just add the script executable into a folder that's already in your PATH.  
 Steps:
 1. Open terminal
 2. Type ``cd ~`` - This will change your working directory to your home folder.
 3. Type ``mkdir Scripts`` - This will make a folder in your home folder called Scripts. This is where we will put the checkhdr executable.
+4. Run the command ``export PATH=$PATH:~/Scripts``. This will add the Scripts folder into the PATH. 
 4. Leave the terminal window open. Open your file explorer and navigate to ~/Scripts.
 5. Copy the checkhdr executable from your downloads folder into the Scripts folder.
 
 That's it! You're now ready to use checkhdr anywhere on your system.
-> Note: It's possible that your shell won't recognize the executable until you quit and reopen your terminal app, so if you run the script and it says "command not found" or something like that, just quite and reopen.
+> Note: It's likely that your shell won't recognize the executable until you quit and reopen your terminal app.
 
 ## Arguments
 > Format: ``checkhdr [arg1] [arg2]``  
