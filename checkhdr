@@ -1,13 +1,14 @@
 #!/bin/bash
 # Gabe's HDR Checker Tool
-# Last Updated: October 16, 2022
+# Last Updated: October 18, 2022
 
 # Add Font Formatting Tags
 bold=$(tput bold)
 normal=$(tput sgr0)
 
 # Intialization
-echo "${bold}Gabe's HDR Checker${normal} v1.03"
+echo "${bold}Gabe's HDR Checker${normal} v1.04"
+
 # Get the current working directory
 wd=`pwd`
 
@@ -19,6 +20,7 @@ echo "Usage: "
 echo "Provide a filename as the first argument to get information about that file."
 echo "Using -d or -debug after the filename will enable debug mode."
 echo "Not providing a filename or providing the first or second argument as -help will show this page."
+
 exit 1
 fi
 
@@ -41,6 +43,7 @@ echo "FFMPEG Package is present on your system. Looking for $1."
 else
 echo "[${bold}CRITICAL${normal}] FFMPEG Package is not installed or is incorrectly installed on your system!"
 echo "Terminating Program..."
+
 exit 1
 fi
 
@@ -97,8 +100,8 @@ echo ""
 echo "-----------------------------------------------------------"
 echo "DEBUG Information:"
 output=`ffprobe -v quiet -show_streams -select_streams v:0 "$file" | grep ^color_transfer=`
-echo "File in question: $file"
-echo "Current working directory: $wd"
+echo "File in Question: $file"
+echo "Current Working Directory: $wd"
 echo "Colour Transfer: $outputct"
 echo "Colour Space: $outputcp"
 echo "Video Codec: $outputcd"
@@ -106,6 +109,8 @@ echo "Video Resolution: $width x $height"
 echo "Video Framerate (as fraction): $fps"
 echo "-----------------------------------------------------------"
 echo ""
+
+exit 1
 fi
 
 
@@ -118,6 +123,7 @@ if [[ $outputct == "color_transfer=arib-std-b67" && $debug != "true" ]]
 then
 echo "-----------------------------------------------------------"
 echo "Target video $1 is ${bold}HDR${normal} and encoded in ${bold}[HLG / Dolby Vision] ${normal}"
+echo "Note: HDR Playback on LCD Displays is discouraged. For the best contrast, set the brightness between 50 and 75%."
 echo
 echo "Additional Video Information: "
 echo "Video Resolution: $width x $height"
@@ -125,6 +131,9 @@ echo "Video Framerate (as fraction): $fps"
 echo "Video Codec: ${codec}"
 echo "Video Colour Space: $colourspace"
 echo "-----------------------------------------------------------"
+
+
+exit 1
 
 # Handle PQ HDR Identifier
 elif [[ $outputct == "color_transfer=smpte2084" && $debug != "true" ]]
@@ -139,8 +148,11 @@ echo "Video Codec: ${codec}"
 echo "Video Colour Space: $colourspace"
 echo "-----------------------------------------------------------"
 
+exit 1
+
 # Handle SDR Content
-else
+elif [[ $debug != "true" ]]
+then
 echo "-----------------------------------------------------------"
 echo "Target video $1 is SDR."
 echo
@@ -150,8 +162,7 @@ echo "Video Framerate (as fraction): $fps"
 echo "Video Codec: ${codec}"
 echo "Video Colour Space: $colourspace"
 echo "-----------------------------------------------------------"
-
+exit 1
 fi
 
 # You've reached the end of the file.
-
