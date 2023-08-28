@@ -1,4 +1,4 @@
-# CheckHDR: Gabe's HDR Checking Script
+# CheckHDR: Tara's HDR Checking Script
 A simple(ish) script to check if the video in question contains the metadata for HDR playback.
 
 ## Dependencies
@@ -8,7 +8,7 @@ It is CRITICAL that your system have the ``ffmpeg`` package installed. Since thi
 (There is an exception to this, see below)
 
 ## Todo
-This repo has a todo list. Click the projects tab above (or click [here](https://github.com/users/GabeThatGuy/projects/1)) to view it.
+This repo has a todo list. Click the projects tab above (or click [here](https://github.com/users/taranodon/projects/1)) to view it.
 ## Instructions
 There are two ways to run this script. You can either run it in any folder on your disk by typing ``bash /path/to/checkhdr /path/to/filename.***`` or by adding the executable to your PATH. If the executable is in your path, you can run the script anywhere by typing ``checkhdr filename.***``
 
