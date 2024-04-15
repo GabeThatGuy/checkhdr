@@ -1,5 +1,5 @@
 #!/bin/bash
-# Gabe's HDR Checker Tool
+# Valerie's HDR Checker Tool
 # Last Updated: July 27th, 2023
 
 # Add Font Formatting Tags
@@ -7,7 +7,7 @@ bold=$(tput bold)
 normal=$(tput sgr0)
 
 # Intialization
-echo "${bold}Gabe's HDR Checker${normal} v1.04"
+echo "${bold}Valerie's HDR Checker${normal} v1.04"
 
 # Get the current working directory
 wd=`pwd`
