@@ -1,6 +1,6 @@
 # CheckHDR: Valerie's HDR Checking Script
 A simple(ish) script to check if the video in question contains the metadata for HDR playback.
-CheckHDR is included in [Valerie's Shell (VSH)](https://github.com/thequeenofclubs/vsh), so it's recommended to install that since it has an easy and simple installer script.
+> CheckHDR is included in [Valerie's Shell (VSH)](https://github.com/thequeenofclubs/vsh), so it's recommended to install that since it has an easy and simple installer script.
 
 ## Dependencies
 It is CRITICAL that your system have the ``ffmpeg`` package installed. Since this script is designed for macOS, you can install it via homebrew by running ``brew install ffmpeg`` in your terminal app of choice. If you're running this on a linux-based system, then you can just use your favourite package manager to install ffmpeg. If your system does NOT have FFPMEG installed, the script will notify you and will terminate immediately.
