@@ -123,7 +123,7 @@ if [[ $outputct == "color_transfer=arib-std-b67" && $debug != "true" ]]
 then
 echo "-----------------------------------------------------------"
 echo "Target video $1 is ${bold}HDR${normal} and encoded in ${bold}[HLG / Dolby Vision] ${normal}"
-echo "Note: HDR Playback on LCD Displays is discouraged. For the best contrast, set the brightness between 50 and 75%."
+echo "Note: HDR Playback on traditional LCD Displays is limited. For the best contrast, set the brightness between 50 and 75%."
 echo
 echo "Additional Video Information: "
 echo "Video Resolution: $width x $height"
