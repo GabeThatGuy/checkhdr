@@ -1,6 +1,6 @@
 #!/bin/bash
 # Valerie's HDR Checker Tool
-# Last Updated: July 27th, 2023
+# Last Updated: July 29th, 2024
 
 # Add Font Formatting Tags
 bold=$(tput bold)
